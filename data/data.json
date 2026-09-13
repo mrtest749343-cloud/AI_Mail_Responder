@@ -1,0 +1,9 @@
+{
+  "user": {
+    "name": "admin",
+    "hashed_password": "scrypt:32768:8:1$k0GxFo3eZAg3QiMF$43cfab5c15ca32d456c0d3e2b42f1d9de41d772c2e5d4184100794fc4aa5c93fda176de1a22b28e322fd8dd460d79d171549fe40e210ca6ecdb6abf44f6a646e"
+  },
+  "answers": [],
+  "api_key": "",
+  "trigger_token": "change-this-dev-token"
+}

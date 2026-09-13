@@ -1,0 +1,333 @@
+/* style.css — AI Email Responder
+   ---------------------------------------------------------------------
+   Direction: "registre de correspondance" — l'app est un carnet qui
+   trie et répond au courrier. On s'inspire d'un vieux registre postal
+   (règles fines horizontales, numérotation d'entrées réelle, tampon
+   d'accent) plutôt que du kit SaaS habituel (cartes arrondies, ombres
+   grises, dégradés).
+   --------------------------------------------------------------------- */
+
+:root {
+  --paper: #eef0ea;
+  --paper-raised: #f7f8f3;
+  --ink: #1d2420;
+  --ink-soft: #4b544c;
+  --ledger-line: #c7cabb;
+  --evergreen: #26433a;
+  --evergreen-dim: #35544a;
+  --stamp: #a5402c;
+  --stamp-dim: #c96a53;
+  --ok: #3c6e4f;
+
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-font-smoothing: antialiased; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+a { color: var(--evergreen); }
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--stamp);
+  outline-offset: 2px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 0.4em 0;
+}
+
+/* ---------------------------------------------------------------------
+   Shell: top band + main column, capped width like a ledger page
+   --------------------------------------------------------------------- */
+
+.shell-header {
+  border-bottom: 2px solid var(--ink);
+  background: var(--paper-raised);
+}
+
+.shell-header__row {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 22px 28px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--evergreen);
+  text-decoration: none;
+}
+
+.brand span {
+  color: var(--stamp);
+}
+
+.shell-header__nav a {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  margin-left: 22px;
+}
+
+.shell-header__nav a:hover { color: var(--evergreen); }
+
+main {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 48px 28px 80px;
+}
+
+.flash {
+  border-left: 3px solid var(--stamp);
+  background: var(--paper-raised);
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  font-size: 0.94rem;
+}
+
+/* ---------------------------------------------------------------------
+   Welcome page
+   --------------------------------------------------------------------- */
+
+.hero {
+  padding: 12px 0 40px;
+  border-bottom: 1px solid var(--ledger-line);
+  margin-bottom: 40px;
+}
+
+.hero__eyebrow {
+  font-size: 0.85rem;
+  color: var(--stamp);
+  margin-bottom: 10px;
+}
+
+.hero h1 {
+  font-size: 2.6rem;
+  max-width: 14ch;
+  line-height: 1.08;
+}
+
+.hero p {
+  max-width: 58ch;
+  color: var(--ink-soft);
+  font-size: 1.08rem;
+}
+
+.hero__actions { margin-top: 28px; }
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 11px 22px;
+  border-radius: 3px;
+  border: 1px solid var(--evergreen);
+  background: var(--evergreen);
+  color: var(--paper-raised);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.btn:hover { background: var(--evergreen-dim); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--evergreen);
+}
+.btn--ghost:hover { background: var(--evergreen); color: var(--paper-raised); }
+
+.btn--stamp {
+  background: var(--stamp);
+  border-color: var(--stamp);
+}
+.btn--stamp:hover { background: var(--stamp-dim); border-color: var(--stamp-dim); }
+
+.btn--small { padding: 6px 14px; font-size: 0.85rem; }
+.btn--danger { border-color: var(--stamp); color: var(--stamp); background: transparent; }
+.btn--danger:hover { background: var(--stamp); color: var(--paper-raised); }
+
+.ledger-steps {
+  list-style: none;
+  counter-reset: step;
+  margin: 0;
+  padding: 0;
+}
+
+.ledger-steps li {
+  counter-increment: step;
+  display: flex;
+  gap: 18px;
+  padding: 18px 0;
+  border-top: 1px solid var(--ledger-line);
+}
+
+.ledger-steps li::before {
+  content: counter(step);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--stamp);
+  width: 1.6em;
+  flex-shrink: 0;
+}
+
+.ledger-steps h3 { font-size: 1.05rem; margin-bottom: 4px; }
+.ledger-steps p { margin: 0; color: var(--ink-soft); font-size: 0.95rem; }
+
+/* ---------------------------------------------------------------------
+   Login
+   --------------------------------------------------------------------- */
+
+.login-wrap {
+  max-width: 380px;
+  margin: 40px auto;
+  padding: 36px 32px;
+  background: var(--paper-raised);
+  border: 1px solid var(--ledger-line);
+  border-top: 3px solid var(--evergreen);
+}
+
+.login-wrap h1 { font-size: 1.6rem; margin-bottom: 6px; }
+.login-wrap .sub { color: var(--ink-soft); font-size: 0.92rem; margin-bottom: 26px; }
+
+.field { margin-bottom: 18px; }
+
+.field label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 0.96rem;
+  font-family: var(--font-body);
+  border: 1px solid var(--ledger-line);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 2px;
+}
+
+.field textarea { resize: vertical; min-height: 90px; }
+
+.error-text {
+  color: var(--stamp);
+  font-size: 0.88rem;
+  margin: -8px 0 16px;
+}
+
+/* ---------------------------------------------------------------------
+   Dashboard
+   --------------------------------------------------------------------- */
+
+.dash-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.dash-head p { margin: 4px 0 0; color: var(--ink-soft); font-size: 0.94rem; }
+
+.panel {
+  margin-bottom: 48px;
+}
+
+.panel__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+
+.panel__head h2 { font-size: 1.3rem; }
+.panel__count { font-size: 0.85rem; color: var(--ink-soft); }
+
+.ledger-row {
+  display: grid;
+  grid-template-columns: 2.2em 1fr auto;
+  gap: 16px;
+  align-items: start;
+  padding: 16px 0;
+  border-top: 1px solid var(--ledger-line);
+}
+
+.ledger-row:last-child { border-bottom: 1px solid var(--ledger-line); }
+
+.ledger-row__num {
+  font-family: var(--font-display);
+  color: var(--stamp);
+  font-size: 1rem;
+}
+
+.ledger-row__main strong { display: block; font-size: 0.98rem; }
+.ledger-row__meta { font-size: 0.85rem; color: var(--ink-soft); margin-top: 3px; }
+.ledger-row__body { font-size: 0.9rem; color: var(--ink-soft); margin-top: 8px; }
+
+.tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.tag {
+  font-size: 0.78rem;
+  padding: 3px 9px;
+  border: 1px solid var(--ledger-line);
+  border-radius: 12px;
+  color: var(--ink-soft);
+}
+
+.row-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+.empty-note {
+  padding: 28px 0;
+  color: var(--ink-soft);
+  font-size: 0.94rem;
+  border-top: 1px solid var(--ledger-line);
+  border-bottom: 1px solid var(--ledger-line);
+}
+
+.new-answer-form {
+  background: var(--paper-raised);
+  border: 1px solid var(--ledger-line);
+  border-left: 3px solid var(--evergreen);
+  padding: 22px 24px;
+  margin-top: 8px;
+}
+
+.new-answer-form .hint { font-size: 0.82rem; color: var(--ink-soft); margin-top: -10px; margin-bottom: 16px; }
+
+.edit-fields { display: none; margin-top: 12px; }
+.edit-fields.is-open { display: block; }
+
+@media (max-width: 620px) {
+  .ledger-row { grid-template-columns: 2em 1fr; }
+  .row-actions { grid-column: 1 / -1; }
+  .hero h1 { font-size: 2rem; }
+}

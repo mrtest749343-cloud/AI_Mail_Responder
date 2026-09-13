@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Tableau de bord — Registre.Mail{% endblock %}
+{% block content %}
+
+<div class="dash-head">
+  <div>
+    <h1 style="font-size: 1.6rem;">Tableau de bord</h1>
+    <p>Consultez le courrier entrant et tenez à jour votre base de réponses.</p>
+  </div>
+  <button id="btn-process" class="btn btn--stamp">Traiter la boîte maintenant</button>
+</div>
+
+<p id="process-result" class="flash" style="display:none;"></p>
+
+<section class="panel">
+  <div class="panel__head">
+    <h2>Courrier entrant</h2>
+    <span class="panel__count" id="mail-count"></span>
+  </div>
+  <div id="mail-list">
+    <p class="empty-note">Chargement du courrier…</p>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel__head">
+    <h2>Base de réponses</h2>
+    <span class="panel__count" id="answer-count"></span>
+  </div>
+  <div id="answer-list">
+    <p class="empty-note">Chargement des entrées…</p>
+  </div>
+
+  <div class="new-answer-form">
+    <h3 style="font-size: 1rem;">Ajouter une entrée</h3>
+    <p class="hint">Utilisez {nom_de_variable} entre accolades pour les valeurs à compléter automatiquement (ex. {name}, {order_number}).</p>
+    <form id="form-new-answer">
+      <div class="field">
+        <label for="new-keywords">Mots-clés (séparés par des virgules)</label>
+        <input type="text" id="new-keywords" name="keywords" placeholder="commande, livraison, statut" required>
+      </div>
+      <div class="field">
+        <label for="new-template">Modèle de réponse</label>
+        <textarea id="new-template" name="template" placeholder="Bonjour {name}, votre commande {order_number} est..." required></textarea>
+      </div>
+      <button type="submit" class="btn">Ajouter au registre</button>
+    </form>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

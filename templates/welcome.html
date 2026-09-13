@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Registre.Mail — répondeur d'e-mails automatisé{% endblock %}
+{% block content %}
+
+<section class="hero">
+  <p class="hero__eyebrow">Répondeur d'e-mails automatisé</p>
+  <h1>Un registre de réponses, tenu par vous, appliqué par la machine.</h1>
+  <p>
+    Ce projet surveille une boîte mail, choisit la réponse la plus pertinente
+    dans une base d'entrées que vous rédigez vous-même, l'adapte au message
+    reçu, puis l'envoie par SMTP — sans jamais improviser un contenu que
+    vous n'avez pas approuvé.
+  </p>
+  <div class="hero__actions">
+    <a href="{{ url_for('login') }}" class="btn">Accéder au tableau de bord</a>
+  </div>
+</section>
+
+<section>
+  <h2 style="font-size: 1.2rem; margin-bottom: 18px;">Comment ça fonctionne</h2>
+  <ol class="ledger-steps">
+    <li>
+      <div>
+        <h3>Lecture de la boîte</h3>
+        <p>Les messages non lus sont récupérés par IMAP, à intervalle régulier ou sur demande.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h3>Sélection dans le registre</h3>
+        <p>Chaque entrée de votre base de réponses porte des mots-clés ; le message reçu est comparé à chacune d'elles.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h3>Adaptation au cas précis</h3>
+        <p>Le modèle retenu est complété avec les informations du message (nom, numéro de commande...) avant l'envoi.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h3>Envoi et suivi</h3>
+        <p>La réponse part par SMTP, en conservant le fil de la conversation d'origine.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+# requirements.txt - Pinned dependencies for the AI Email Responder.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Flask is the web framework. python-dotenv loads environment variables.
+# The email modules use only Python standard library (imaplib, smtplib, email).
+# werkzeug is bundled with Flask but listed explicitly for clarity.
+# openai is optional – included only if AI adaptation is desired.
+
+Flask>=3.0
+python-dotenv>=1.0
+werkzeug>=3.0
